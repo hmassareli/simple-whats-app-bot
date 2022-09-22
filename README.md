@@ -11,6 +11,8 @@ A simple implementation of whats-app-web.js lib.
 
 #Features available
 - list 10 pokemons
+
 If you send this message to the whats app number logged in the program, it will return a list of pokemons of any number
+
 - disparar mensagens
 this command start the proccess of sending out messages to the specified destinations
