@@ -1,6 +1,6 @@
 # simple-whats-app-bot
 A simple implementation of whats-app-web.js library.  
-This code is a personal project designed to implement a simple whats app bot.
+This code is a personal project designed to be a simple whats app bot.
 
 # How to set up your machine
 - 1: Make sure you have Node v12+ installed 
