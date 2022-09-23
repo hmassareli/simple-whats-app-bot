@@ -1,9 +1,10 @@
-const axios = require("axios");
 const DetectLanguage = require("detectlanguage");
+const getDeeplTranslation = require("./deepTranslate");
+const getFreeTranslation = require("./freeTranslate");
 
 const translateText = (userMessage, client) => {
   let step = 0;
-
+  const deepTranslate = getDeeplTranslation();
   const translateByLanguage = (message, language) => {
     if (language === "pt") {
       sendMessage("A mensagem está em português, vou traduzir para inglês");
@@ -17,23 +18,12 @@ const translateText = (userMessage, client) => {
   };
 
   const translate = (text, from, to) => {
-    axios
-      .post(
-        "https://translate.fortytwo-it.com/translate",
-        {
-          q: text,
-          source: from,
-          target: to,
-          format: "text",
-        },
-        { headers: { "Content-Type": "application/json" } }
-      )
-      .then((response) => {
-        sendMessage(response.data.translatedText);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    deepTranslate(from, to, text).then((deeplTranslation) => {
+      sendMessage("deepL: \n" + deeplTranslation);
+    });
+    // getFreeTranslation(from, to, text).then((freeTranslation) => {
+    //   sendMessage("FreeTranslate: \n" + freeTranslation);
+    // });
   };
 
   sendMessage("Por favor, insira a mensagem que deseja traduzir");
