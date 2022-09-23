@@ -7,6 +7,7 @@
 //client.pupPage.click("#pane-side")
 
 const qrcode = require("qrcode-terminal");
+const translateText = require("./functions/translateText");
 
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const getPokemons = require("./functions/getPokemons");
@@ -27,6 +28,9 @@ client.on("ready", () => {
     }
     if (message.body.toLowerCase().includes("disparar mensagens")) {
       sendMessages(message, client);
+    }
+    if (message.body.toLowerCase().includes("traduzir")) {
+      translateText(message, client);
     }
     console.log(message.body);
     //get a list of 10 pokemons from the pokeapi and send it to the user
