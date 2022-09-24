@@ -34,7 +34,7 @@ client.on("ready", () => {
         translateText(message, client);
       }
     } else {
-      if (message.body.toLowerCase().includes("translatepf")) {
+      if (message.body.toLowerCase().includes("translate")) {
         translateText(message, client);
       }
     }
