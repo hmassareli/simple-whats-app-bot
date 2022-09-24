@@ -35,7 +35,6 @@ client.on("ready", () => {
       }
     } else {
       if (message.body.toLowerCase().includes("translatepf")) {
-        console.log("translatePF");
         translateText(message, client);
       }
     }

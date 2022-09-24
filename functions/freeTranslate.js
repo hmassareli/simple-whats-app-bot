@@ -1,8 +1,9 @@
 const { performance } = require("perf_hooks");
-var startTime = performance.now();
 const axios = require("axios");
 
 const translateText = (from, to, text) => {
+  var startTime = performance.now();
+
   return axios
     .post(
       "https://translate.fortytwo-it.com/translate",
@@ -24,5 +25,3 @@ const translateText = (from, to, text) => {
     });
 };
 module.exports = translateText;
-
-console.log(translateText("pt", "en", "Olá, tudo bem?"));

@@ -4,7 +4,6 @@ const getPokemons = (message, client) => {
   axios
     .get(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`)
     .then((response) => {
-      console.log(message.from);
       client.sendMessage(
         message.from,
         response.data.results.reduce((acc, pokemon) => {

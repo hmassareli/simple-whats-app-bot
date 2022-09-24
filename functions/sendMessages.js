@@ -35,7 +35,6 @@ const sendMessages = (userMessage, client) => {
         function sendMessages(line, randomInt) {
           setTimeout(() => {
             client.sendMessage(line + "@c.us", textToSend);
-            console.log(randomInt);
           }, randomInt);
         }
         destinations.map((line) => {
