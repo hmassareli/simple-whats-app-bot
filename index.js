@@ -22,15 +22,22 @@ client.on("qr", (qr) => {
 
 client.on("ready", () => {
   console.log("Client is ready!");
-  client.on("message", (message) => {
-    if (message.body.toLowerCase().includes("pokemons")) {
-      getPokemons(message, client);
-    }
-    if (message.body.toLowerCase().includes("disparar mensagens")) {
-      sendMessages(message, client);
-    }
-    if (message.body.toLowerCase().includes("traduzir")) {
-      translateText(message, client);
+  client.on("message_create", (message) => {
+    if (message.fromMe === false) {
+      if (message.body.toLowerCase().includes("pokemons")) {
+        getPokemons(message, client);
+      }
+      if (message.body.toLowerCase().includes("disparar mensagens")) {
+        sendMessages(message, client);
+      }
+      if (message.body.toLowerCase().includes("traduzir")) {
+        translateText(message, client);
+      }
+    } else {
+      if (message.body.toLowerCase().includes("translatepf")) {
+        console.log("translatePF");
+        translateText(message, client);
+      }
     }
     console.log(message.body);
     //get a list of 10 pokemons from the pokeapi and send it to the user

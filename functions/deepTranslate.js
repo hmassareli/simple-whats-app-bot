@@ -2,17 +2,17 @@ const puppeteer = require("puppeteer");
 const { performance } = require("perf_hooks");
 
 const deepTranslate = async () => {
-  browser = puppeteer.launch();
+  const browser = await puppeteer.launch({ headless: false });
   const [page] = await browser.pages();
+  console.log("chegou nessa parte");
   await page.goto(`https://www.deepl.com/translator#auto/pt/Hello`);
   return async (from, to, text) =>
-    await getDeeplTranslation(page, from, to, text);
+    await getDeeplTranslation(browser, page, from, to, text);
 };
 
 const getDeeplTranslation = async (browser, page, from, to, text) => {
-  // Get the "viewport" of the page, as reported by the page.
   var startTime = performance.now();
-
+  console.log("chegou nessa parte 2" + text);
   await page.waitForFunction(
     'document.querySelector("#target-dummydiv").textContent.trim() != ""'
   );
@@ -29,6 +29,3 @@ const getDeeplTranslation = async (browser, page, from, to, text) => {
 };
 
 module.exports = deepTranslate;
-getDeeplTranslation("pt", "en", "Olá, tudo bem?").then((result) => {
-  console.log(result);
-});

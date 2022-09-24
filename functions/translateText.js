@@ -5,6 +5,7 @@ const getFreeTranslation = require("./freeTranslate");
 const translateText = (userMessage, client) => {
   let step = 0;
   const deepTranslate = getDeeplTranslation();
+
   const translateByLanguage = (message, language) => {
     if (language === "pt") {
       sendMessage("A mensagem está em português, vou traduzir para inglês");
@@ -18,8 +19,11 @@ const translateText = (userMessage, client) => {
   };
 
   const translate = (text, from, to) => {
-    deepTranslate(from, to, text).then((deeplTranslation) => {
-      sendMessage("deepL: \n" + deeplTranslation);
+    console.log("função translate");
+    deepTranslate.then((translate) => {
+      translate(from, to, text).then((deeplTranslation) => {
+        sendMessage("deepL: \n" + deeplTranslation);
+      });
     });
     // getFreeTranslation(from, to, text).then((freeTranslation) => {
     //   sendMessage("FreeTranslate: \n" + freeTranslation);
@@ -28,10 +32,10 @@ const translateText = (userMessage, client) => {
 
   sendMessage("Por favor, insira a mensagem que deseja traduzir");
 
-  client.on("message", (message) => {
+  client.on("message_create", (message) => {
     if (message.from === userMessage.from) {
       step++;
-      if (step === 1) {
+      if (step === 2) {
         step++;
         let detectlanguage = new DetectLanguage(
           "e74ebc1f6928e312a86ef4cf23233224"
@@ -40,8 +44,6 @@ const translateText = (userMessage, client) => {
           console.log(JSON.stringify(result));
           translateByLanguage(message, result[0].language);
         });
-      } else {
-        return;
       }
     }
   });
