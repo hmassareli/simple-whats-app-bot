@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const { performance } = require("perf_hooks");
 
 const deepTranslate = async () => {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({ headless: false });
   const [page] = await browser.pages();
   await page.goto(`https://www.deepl.com/translator#auto/pt/Hello`);
   return async (from, to, text) =>

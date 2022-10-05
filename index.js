@@ -1,46 +1,20 @@
-// if (message.body === "last 10 messages") {
-//   client.getChats().then((chats) => {
-//     client.sendMessage(message.from, JSON.stringify(chats));
-//   });
-// }
-
-//client.pupPage.click("#pane-side")
-
-const qrcode = require("qrcode-terminal");
-const translateText = require("./functions/translateText");
-
-const { Client, LocalAuth } = require("whatsapp-web.js");
-const getPokemons = require("./functions/getPokemons");
-const sendMessages = require("./functions/sendMessages");
-const client = new Client({
-  authStrategy: new LocalAuth({ clientId: "bot-zdg" }),
+const express = require("express");
+const app = express();
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+const path = require("path");
+io.on("connection", (socket) => {
+  console.log("a user connected");
+});
+io.on("disconnect", (socket) => {
+  console.log("a user disconnected");
 });
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
+server.listen(3000, () => {
+  console.log("listening on *:3000");
 });
 
-client.on("ready", () => {
-  console.log("Client is ready!");
-  client.on("message_create", (message) => {
-    if (message.fromMe === false) {
-      if (message.body.toLowerCase().includes("pokemons")) {
-        getPokemons(message, client);
-      }
-      if (message.body.toLowerCase().includes("disparar mensagens")) {
-        sendMessages(message, client);
-      }
-      if (message.body.toLowerCase().includes("traduzir")) {
-        translateText(message, client);
-      }
-    } else {
-      if (message.body.toLowerCase().includes("translate")) {
-        translateText(message, client);
-      }
-    }
-    console.log(message.body);
-    //get a list of 10 pokemons from the pokeapi and send it to the user
-  });
-});
-
-client.initialize();
+const htmlPath = path.join(__dirname, "html");
+app.use(express.static(htmlPath));

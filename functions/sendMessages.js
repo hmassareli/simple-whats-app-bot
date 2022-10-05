@@ -31,7 +31,6 @@ const sendMessages = (userMessage, client) => {
         );
         const getRandomNumber = () => Math.floor(Math.random() * 15000);
         let randomNumber = 0;
-        // let secondRandomNumber = Math.floor(Math.random() * 2000 + 1000);
         function sendMessages(line, randomInt) {
           setTimeout(() => {
             client.sendMessage(line + "@c.us", textToSend);
